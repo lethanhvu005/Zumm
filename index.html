@@ -15,7 +15,6 @@
       --pink4:#ff6ca2;
       --text:#8f5679;
       --soft:#ca88a8;
-      --white:rgba(255,255,255,.95);
     }
 
     *{
@@ -94,23 +93,22 @@
       box-shadow:0 24px 70px rgba(111,72,108,.16);
       overflow:hidden;
       position:relative;
-      padding:28px 24px 24px;
+      padding:24px 20px;
     }
 
     .title{
       text-align:center;
       color:white;
-      font-size:clamp(26px,3vw,38px);
+      font-size:clamp(24px,3vw,38px);
       font-weight:900;
       text-shadow:0 4px 18px rgba(0,0,0,.08);
-      margin-top:8px;
+      margin-top:4px;
     }
 
     .subtitle{
       text-align:center;
       color:rgba(255,255,255,.96);
-      margin-top:10px;
-      margin-bottom:8px;
+      margin-top:8px;
       font-size:clamp(14px,1.7vw,18px);
       font-weight:700;
     }
@@ -118,23 +116,24 @@
     .stage{
       position:relative;
       width:100%;
-      height:100%;
+      height:calc(100% - 70px);
     }
 
+    /* KHỐI CHÍNH Ở GIỮA */
     .letter-scene{
       position:absolute;
       left:50%;
-      top:55%;
+      top:50%;
       transform:translate(-50%,-50%);
-      width:min(92%,760px);
-      min-height:560px;
+      width:100%;
+      height:100%;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      gap:26px;
-      transition:.45s ease;
+      gap:22px;
       z-index:10;
+      transition:.45s ease;
     }
 
     .letter-scene.hide{
@@ -143,11 +142,12 @@
       pointer-events:none;
     }
 
+    /* KHUNG ĐỌC THƯ */
     .reader{
       position:relative;
-      width:min(100%,640px);
+      width:min(92%,640px);
       min-height:250px;
-      background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,247,252,.94));
+      background:linear-gradient(180deg, rgba(255,255,255,.97), rgba(255,247,252,.94));
       border-radius:32px;
       box-shadow:
         0 20px 55px rgba(113,73,109,.16),
@@ -221,6 +221,7 @@
       transform:translateY(-2px) scale(1.04);
     }
 
+    /* KHỐI PHONG BÌ */
     .envelope-zone{
       position:relative;
       width:360px;
@@ -228,12 +229,13 @@
       display:flex;
       justify-content:center;
       align-items:center;
+      margin:0 auto;
       z-index:10;
     }
 
     .env-shadow{
       position:absolute;
-      bottom:10px;
+      bottom:8px;
       width:250px;
       height:34px;
       border-radius:50%;
@@ -326,16 +328,17 @@
       transform:rotateX(180deg);
     }
 
+    /* TỜ GIẤY CĂN GIỮA */
     .paper{
       position:absolute;
-      left:20px;
+      left:50%;
       top:16px;
       width:260px;
       height:164px;
       border-radius:22px;
       background:linear-gradient(180deg,#fff,#fff8fc);
       box-shadow:0 16px 28px rgba(104,67,98,.14);
-      transform:translateY(96px) scale(.98);
+      transform:translateX(-50%) translateY(96px) scale(.98);
       transition:transform .9s cubic-bezier(.22,1,.36,1);
       z-index:3;
       display:flex;
@@ -346,7 +349,7 @@
     }
 
     .envelope.opened .paper{
-      transform:translateY(-58px) scale(1.01);
+      transform:translateX(-50%) translateY(-58px) scale(1.01);
     }
 
     .paper-content{
@@ -367,16 +370,12 @@
 
     .hint{
       position:relative;
-      left:auto;
-      bottom:auto;
-      transform:none;
       color:rgba(255,255,255,.95);
       font-size:14px;
       font-weight:700;
       animation:hintBlink 1.6s ease-in-out infinite;
-      z-index:8;
       transition:.3s ease;
-      margin-top:6px;
+      margin-top:2px;
     }
 
     @keyframes hintBlink{
@@ -583,19 +582,20 @@
       .card{
         width:96vw;
         height:95vh;
-        padding:22px 14px 20px;
+        padding:18px 12px;
+      }
+
+      .stage{
+        height:calc(100% - 62px);
       }
 
       .letter-scene{
-        top:54%;
-        width:94%;
-        min-height:520px;
-        gap:20px;
+        gap:18px;
       }
 
       .reader{
-        width:100%;
-        min-height:230px;
+        width:94%;
+        min-height:220px;
         padding:22px 18px 18px;
       }
 
@@ -623,8 +623,12 @@
       .paper{
         width:206px;
         height:132px;
-        left:17px;
         top:13px;
+        transform:translateX(-50%) translateY(82px) scale(.98);
+      }
+
+      .envelope.opened .paper{
+        transform:translateX(-50%) translateY(-48px) scale(1.01);
       }
 
       .paper-main{
@@ -757,8 +761,6 @@
 
     let opened = false;
     let currentPage = 0;
-
-    /* Đếm theo phiên hiện tại, không lấy số cũ từ localStorage */
     let yesCount = 0;
     let noCount = 0;
     let heartInterval = null;
